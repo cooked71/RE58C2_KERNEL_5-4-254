@@ -1,6 +1,5 @@
 /* SPDX-License-Identifier: GPL-2.0 */
 #include <linux/module.h>
-
 #include <linux/sched.h>
 #include <trace/events/sched.h>
 #include "sched.h"
@@ -77,7 +76,7 @@ static void sched_pelt_cfs(void *data, struct cfs_rq *cfs_rq)
 		_trace_cfs(cfs_rq, trace_sched_pelt_cfs);
 
 	if (trace_uclamp_util_cfs_enabled()) {
-		unsigned int cpu = sched_trace_cfs_rq_cpu(cfs_rq);
+		unsigned int __maybe_unused cpu = sched_trace_cfs_rq_cpu(cfs_rq);
 		bool __maybe_unused is_root_rq = (&rq_of(cfs_rq)->cfs == cfs_rq);
 
 		trace_uclamp_util_cfs(is_root_rq, cpu, cfs_rq);
