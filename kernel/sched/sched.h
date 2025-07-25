@@ -2689,4 +2689,7 @@ static inline unsigned long cpu_util_dl(struct rq *rq) { return 0; }
 static inline unsigned long cpu_bw_dl(struct rq *rq) { return 0; }
 #endif
 
+#ifndef cpu_util_cfs
+static inline unsigned long cpu_util_cfs(struct rq *rq) { return 0; }
+#endif
 
