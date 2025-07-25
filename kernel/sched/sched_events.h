@@ -265,8 +265,8 @@ TRACE_EVENT_CONDITION(uclamp_util_cfs,
 		  __entry->uclamp_min, __entry->uclamp_max)
 );
 #else
-#define trace_uclamp_util_se(is_task, p, rq) (while (false) {})
-#define trace_uclamp_util_se_enabled() false
+#define trace_uclamp_util_cfs(is_root, cpu, cfs_rq) do {} while (0)
+#define trace_uclamp_util_se(is_task, p, rq) do {} while (0)
 #define trace_uclamp_util_cfs(is_root, cpu, cfs_rq) (while (false) {})
 #define trace_uclamp_util_cfs_enabled() false
 #endif /* CONFIG_UCLAMP_TASK */
