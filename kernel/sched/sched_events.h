@@ -17,7 +17,9 @@
 #define RBL_LOAD_MEMBER		runnable_load_avg
 #define RBL_LOAD_STR		"rbl_load"
 
+#ifndef trace_uclamp_util_se_enabled
 static inline bool trace_uclamp_util_se_enabled(void) { return false; }
+#endif
 
 TRACE_EVENT(sched_pelt_cfs,
 
