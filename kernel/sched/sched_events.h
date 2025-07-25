@@ -279,13 +279,13 @@ TRACE_EVENT_CONDITION(uclamp_util_cfs,
 
 #endif /* _SCHED_EVENTS_H */
 
-#ifndef trace_uclamp_util_se_enabled
+/*#ifndef trace_uclamp_util_se_enabled
 static inline bool trace_uclamp_util_se_enabled(void) { return false; }
 #endif
 
 #ifndef trace_uclamp_util_cfs_enabled
 static inline bool trace_uclamp_util_cfs_enabled(void) { return false; }
-#endif
+#endif */
 
 /* This part must be outside protection */
 
