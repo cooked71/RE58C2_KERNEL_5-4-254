@@ -2676,3 +2676,20 @@ static inline u64 sched_ktime_clock(void)
 	return sched_clock();
 }
 #endif
+
+/* === Stubs for missing scheduling helpers === */
+static inline unsigned long cpu_util_rt(struct rq *rq)
+{
+    return 0;
+}
+
+static inline unsigned long cpu_util_dl(struct rq *rq)
+{
+    return 0;
+}
+
+static inline unsigned long cpu_bw_dl(struct rq *rq)
+{
+    return 0;
+}
+
