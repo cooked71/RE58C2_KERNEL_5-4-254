@@ -8,6 +8,14 @@
 #define CREATE_TRACE_POINTS
 #include "sched_events.h"
 
+#ifndef trace_uclamp_util_se_enabled
+static inline bool trace_uclamp_util_se_enabled(void) { return false; }
+#endif
+
+#ifndef trace_uclamp_util_cfs_enabled
+static inline bool trace_uclamp_util_cfs_enabled(void) { return false; }
+#endif
+
 static inline struct cfs_rq *get_group_cfs_rq(struct sched_entity *se)
 {
 #ifdef CONFIG_FAIR_GROUP_SCHED
@@ -28,7 +36,7 @@ static inline struct cfs_rq *get_se_cfs_rq(struct sched_entity *se)
 
 static inline void _trace_cfs(struct cfs_rq *cfs_rq,
 			      void (*trace_event)(int, char*,
-						  const struct sched_avg*))
+					      const struct sched_avg*))
 {
 	const struct sched_avg *avg;
 	char path[PATH_SIZE];
@@ -43,7 +51,7 @@ static inline void _trace_cfs(struct cfs_rq *cfs_rq,
 
 static inline void _trace_se(struct sched_entity *se,
 			     void (*trace_event)(int, char*, char*, int,
-						 const struct sched_avg*))
+					     const struct sched_avg*))
 {
 	void *gcfs_rq = get_group_cfs_rq(se);
 	void *cfs_rq = get_se_cfs_rq(se);
@@ -74,7 +82,6 @@ static void sched_pelt_cfs(void *data, struct cfs_rq *cfs_rq)
 
 		trace_uclamp_util_cfs(is_root_rq, cpu, cfs_rq);
 	}
-
 }
 
 static void sched_pelt_rt(void *data, struct rq *rq)
@@ -125,8 +132,8 @@ static void sched_pelt_se(void *data, struct sched_entity *se)
 		void __maybe_unused *cfs_rq = get_se_cfs_rq(se);
 
 		trace_uclamp_util_se(entity_is_task(se),
-				     container_of(se, struct task_struct, se),
-				     rq_of(cfs_rq));
+				 container_of(se, struct task_struct, se),
+				 rq_of(cfs_rq));
 	}
 }
 
@@ -178,7 +185,6 @@ static void sched_tp_remove(void)
 	unregister_trace_sched_util_est_cfs_tp(sched_util_est_cfs, NULL);
 	unregister_trace_sched_util_est_se_tp(sched_util_est_se, NULL);
 }
-
 
 module_init(sched_tp_init);
 module_exit(sched_tp_remove);
