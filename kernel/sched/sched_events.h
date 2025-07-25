@@ -283,7 +283,11 @@ TRACE_EVENT_CONDITION(uclamp_util_cfs,
 static inline bool trace_uclamp_util_se_enabled(void) { return false; }
 #endif
 
-/* This part must be outside protection 
+#ifndef trace_uclamp_util_cfs_enabled
+static inline bool trace_uclamp_util_cfs_enabled(void) { return false; }
+#endif
+
+/* This part must be outside protection */
 
 #undef TRACE_INCLUDE_PATH
 #define TRACE_INCLUDE_PATH .
