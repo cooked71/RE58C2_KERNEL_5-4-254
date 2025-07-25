@@ -277,20 +277,19 @@ TRACE_EVENT_CONDITION(uclamp_util_cfs,
 #define trace_uclamp_util_se(is_task, p, rq) do {} while (0)
 #endif
 
-#endif /* CONFIG_UCLAMP_TASK */
-
-#endif /* _SCHED_EVENTS_H */
-
-/*#ifndef trace_uclamp_util_se_enabled
+#ifndef trace_uclamp_util_se_enabled
 static inline bool trace_uclamp_util_se_enabled(void) { return false; }
 #endif
 
 #ifndef trace_uclamp_util_cfs_enabled
 static inline bool trace_uclamp_util_cfs_enabled(void) { return false; }
-#endif */
+#endif
+
+#endif /* CONFIG_UCLAMP_TASK */
+
+#endif /* _SCHED_EVENTS_H */
 
 /* This part must be outside protection */
-
 #undef TRACE_INCLUDE_PATH
 #define TRACE_INCLUDE_PATH .
 #define TRACE_INCLUDE_FILE sched_events
