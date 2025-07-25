@@ -17,6 +17,8 @@
 #define RBL_LOAD_MEMBER		runnable_load_avg
 #define RBL_LOAD_STR		"rbl_load"
 
+static inline bool trace_uclamp_util_se_enabled(void) { return false; }
+
 TRACE_EVENT(sched_pelt_cfs,
 
 	TP_PROTO(int cpu, char *path, const struct sched_avg *avg),
@@ -267,13 +269,14 @@ TRACE_EVENT_CONDITION(uclamp_util_cfs,
 #else
 #define trace_uclamp_util_cfs(is_root, cpu, cfs_rq) do {} while (0)
 #define trace_uclamp_util_se(is_task, p, rq) do {} while (0)
-#define trace_uclamp_util_cfs(is_root, cpu, cfs_rq) (while (false) {})
-#define trace_uclamp_util_cfs_enabled() false
 #endif /* CONFIG_UCLAMP_TASK */
-
 #endif /* _SCHED_EVENTS_H */
 
+#ifndef trace_uclamp_util_se_enabled
+static inline bool trace_uclamp_util_se_enabled(void) { return false; }
+#endif
 /* This part must be outside protection */
+
 #undef TRACE_INCLUDE_PATH
 #define TRACE_INCLUDE_PATH .
 #define TRACE_INCLUDE_FILE sched_events
