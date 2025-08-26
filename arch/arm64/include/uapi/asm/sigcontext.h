@@ -21,11 +21,6 @@
 
 #include <linux/types.h>
 
-/* Define __uint128_t for ARM64 if not already defined */
-#ifndef __uint128_t
-#define __uint128_t unsigned __int128
-#endif
-  
 /*
  * Signal context structure - contains all info to do with the state
  * before the signal handler was invoked.
@@ -74,15 +69,24 @@ struct _aarch64_ctx {
 };
 
 #define FPSIMD_MAGIC	0x46508001
-
+ 
+#ifdef __arm__
+/* 32-bit ARM doesn't support __uint128_t */
 struct fpsimd_context {
 	struct _aarch64_ctx head;
 	__u32 fpsr;
 	__u32 fpcr;
-	__uint128_t vregs[32];
 };
+#else
+ struct fpsimd_context {
+ 	struct _aarch64_ctx head;
+ 	__u32 fpsr;
+ 	__u32 fpcr;
+ 	__uint128_t vregs[32];
+ };
+#endif
 
-/*
+ /*
  * Note: similarly to all other integer fields, each V-register is stored in an
  * endianness-dependent format, with the byte at offset i from the start of the
  * in-memory representation of the register value containing
