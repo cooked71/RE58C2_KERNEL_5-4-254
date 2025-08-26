@@ -36,29 +36,7 @@ struct sigcontext {
 	__u8 __reserved[4096] __attribute__((__aligned__(16)));
 };
 
-/*
- * Allocation of __reserved[]:
- * (Note: records do not necessarily occur in the order shown here.)
- *
- *	size		description
- *
- *	0x210		fpsimd_context
- *	 0x10		esr_context
- *	0x8a0		sve_context (vl <= 64) (optional)
- *	 0x20		extra_context (optional)
- *	 0x10		terminator (null _aarch64_ctx)
- *
- *	0x510		(reserved for future allocation)
- *
- * New records that can exceed this space need to be opt-in for userspace, so
- * that an expanded signal frame is not generated unexpectedly.  The mechanism
- * for opting in will depend on the extension that generates each new record.
- * The above table documents the maximum set and sizes of records than can be
- * generated when userspace does not opt in for any such extension.
- */
-
-/*
- * Header to be used at the beginning of structures extending the user
+/* Header to be used at the beginning of structures extending the user
  * context. Such structures must be placed after the rt_sigframe on the stack
  * and be 16-byte aligned. The last structure must be a dummy one with the
  * magic and size set to 0.
@@ -69,21 +47,24 @@ struct _aarch64_ctx {
 };
 
 #define FPSIMD_MAGIC	0x46508001
- 
-#ifdef __arm__
-/* 32-bit ARM doesn't support __uint128_t */
+
+#ifdef __aarch64__
+/* 64-bit version with __uint128_t support */
 struct fpsimd_context {
 	struct _aarch64_ctx head;
 	__u32 fpsr;
 	__u32 fpcr;
+	__uint128_t vregs[32];
 };
 #else
- struct fpsimd_context {
- 	struct _aarch64_ctx head;
- 	__u32 fpsr;
- 	__u32 fpcr;
- 	__uint128_t vregs[32];
- };
+/* 32-bit compatible version */
+struct fpsimd_context {
+	struct _aarch64_ctx head;
+	__u32 fpsr;
+	__u32 fpcr;
+	/* Use 64-bit arrays instead of 128-bit for 32-bit compatibility */
+	__u64 vregs[64];
+};
 #endif
 
  /*
