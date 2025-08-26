@@ -21,11 +21,6 @@
 
 #include <linux/types.h>
 
-/* Define __uint128_t for ARM64 if not already defined */
-#ifndef __uint128_t
-#define __uint128_t unsigned __int128
-#endif
-  
 /*
  * Signal context structure - contains all info to do with the state
  * before the signal handler was invoked.
