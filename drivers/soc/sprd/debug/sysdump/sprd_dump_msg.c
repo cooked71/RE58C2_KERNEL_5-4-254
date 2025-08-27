@@ -17,7 +17,7 @@
 #include <asm/stacktrace.h>
 #include <linux/kallsyms.h>
 #include <linux/soc/sprd/sprd_sysdump.h>
-#include "../../../../../kernel/sched/sched.h"
+/*#include "../../../../../kernel/sched/sched.h"*/
 #ifdef CONFIG_ARM64
 #include "sysdump64.h"
 #endif
