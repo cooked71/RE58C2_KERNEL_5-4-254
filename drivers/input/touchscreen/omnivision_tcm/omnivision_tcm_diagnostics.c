@@ -552,13 +552,13 @@ static struct ovt_tcm_module_cb diag_module = {
 	.early_suspend = NULL,
 };
 
-int __init diag_module_init(void)
+int diag_module_init(void)
 {
 	return ovt_tcm_add_module(&diag_module, true);
 }
 EXPORT_SYMBOL(diag_module_init);
 
-void __exit diag_module_exit(void)
+void diag_module_exit(void)
 {
 	ovt_tcm_add_module(&diag_module, false);
 

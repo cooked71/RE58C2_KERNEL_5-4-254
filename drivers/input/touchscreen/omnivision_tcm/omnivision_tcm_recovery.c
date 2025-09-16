@@ -1301,13 +1301,13 @@ static struct ovt_tcm_module_cb recovery_module = {
 	.early_suspend = NULL,
 };
 
-int __init recovery_module_init(void)
+int  recovery_module_init(void)
 {
 	return ovt_tcm_add_module(&recovery_module, true);
 }
 EXPORT_SYMBOL(recovery_module_init);
 
-void __exit recovery_module_exit(void)
+void recovery_module_exit(void)
 {
 	ovt_tcm_add_module(&recovery_module, false);
 

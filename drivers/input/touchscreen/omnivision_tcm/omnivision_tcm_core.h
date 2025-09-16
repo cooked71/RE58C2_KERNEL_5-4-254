@@ -618,18 +618,18 @@ extern int ovt_tcm_add_module(struct ovt_tcm_module_cb *mod_cb, bool insert);
 
 extern int g_firmware_version;
 
-extern int __init device_module_init(void);
-extern int __init diag_module_init(void);
-extern int __init recovery_module_init(void);
-extern int __init reflash_module_init(void);
-extern int __init testing_module_init(void);
-extern int __init zeroflash_module_init(void);
-extern void __exit device_module_exit(void);
-extern void __exit diag_module_exit(void);
-extern void __exit recovery_module_exit(void);
-extern void __exit reflash_module_exit(void);
-extern void __exit testing_module_exit(void);
-extern void __exit zeroflash_module_exit(void);
+extern int device_module_init(void);
+extern int diag_module_init(void);
+extern int recovery_module_init(void);
+extern int reflash_module_init(void);
+extern int testing_module_init(void);
+extern int zeroflash_module_init(void);
+extern void device_module_exit(void);
+extern void diag_module_exit(void);
+extern void recovery_module_exit(void);
+extern void reflash_module_exit(void);
+extern void testing_module_exit(void);
+extern void zeroflash_module_exit(void);
 
 int touch_init(struct ovt_tcm_hcd *tcm_hcd);
 int touch_remove(struct ovt_tcm_hcd *tcm_hcd);

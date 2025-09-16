@@ -695,13 +695,13 @@ static struct ovt_tcm_module_cb device_module = {
 	.early_suspend = NULL,
 };
 
-int __init device_module_init(void)
+int device_module_init(void)
 {
 	return ovt_tcm_add_module(&device_module, true);
 }
 EXPORT_SYMBOL(device_module_init);
 
-void __exit device_module_exit(void)
+void device_module_exit(void)
 {
 	ovt_tcm_add_module(&device_module, false);
 

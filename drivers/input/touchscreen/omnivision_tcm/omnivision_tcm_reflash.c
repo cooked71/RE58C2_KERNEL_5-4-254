@@ -2575,13 +2575,13 @@ static struct ovt_tcm_module_cb reflash_module = {
 	.early_suspend = NULL,
 };
 
-int __init reflash_module_init(void)
+int reflash_module_init(void)
 {
 	return ovt_tcm_add_module(&reflash_module, true);
 }
 EXPORT_SYMBOL(reflash_module_init);
 
-void __exit reflash_module_exit(void)
+void reflash_module_exit(void)
 {
 	ovt_tcm_add_module(&reflash_module, false);
 

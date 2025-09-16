@@ -285,6 +285,13 @@ config DM_CRYPT
 
 	  If unsure, say N.
 
+config DM_LINEAR
+	tristate "Linear target"
+	depends on BLK_DEV_DM
+	help
+	  A linear mapping target for the device-mapper driver.
+
+
 config DM_DEFAULT_KEY
 	tristate "Default-key target support"
 	depends on BLK_DEV_DM

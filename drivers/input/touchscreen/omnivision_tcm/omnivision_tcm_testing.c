@@ -2446,13 +2446,13 @@ static struct ovt_tcm_module_cb testing_module = {
 	.early_suspend = NULL,
 };
 
-int __init testing_module_init(void)
+int testing_module_init(void)
 {
 	return ovt_tcm_add_module(&testing_module, true);
 }
 EXPORT_SYMBOL(testing_module_init);
 
-void __exit testing_module_exit(void)
+void testing_module_exit(void)
 {
 	ovt_tcm_add_module(&testing_module, false);
 

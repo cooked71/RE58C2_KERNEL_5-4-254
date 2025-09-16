@@ -1546,13 +1546,13 @@ static struct ovt_tcm_module_cb zeroflash_module = {
 	.early_suspend = NULL,
 };
 
-int __init zeroflash_module_init(void)
+int zeroflash_module_init(void)
 {
 	return ovt_tcm_add_module(&zeroflash_module, true);
 }
 EXPORT_SYMBOL(zeroflash_module_init);
 
-void __exit zeroflash_module_exit(void)
+void zeroflash_module_exit(void)
 {
 	ovt_tcm_add_module(&zeroflash_module, false);
 

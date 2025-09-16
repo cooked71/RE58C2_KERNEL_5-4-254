@@ -69,7 +69,7 @@
 				pinctrl-2 = <&ap_uart_tx_low>;
 				pinctrl-3 = <&ap_uart_rx_low>;
 
-				status = "disabled";
+				status = "okay";
 			};
 
 			uart1: serial@0x200b0000 {
@@ -81,7 +81,7 @@
 				clock-names = "enable", "uart", "source";
 				clocks = <&apapb_gate CLK_UART1_EB>,
 					<&ap_clk CLK_AP_UART1>, <&ext_26m>;
-				status = "disabled";
+				status = "okay";
 			};
 
 			uart2: serial@0x200c0000 {
@@ -93,7 +93,7 @@
 				clock-names = "enable", "uart", "source";
 				clocks = <&apapb_gate CLK_UART2_EB>,
 					<&ap_clk CLK_AP_UART2>, <&ext_26m>;
-				status = "disabled";
+				status = "okay";
 			};
 
 			i2c0: i2c@0x200d0000 {
