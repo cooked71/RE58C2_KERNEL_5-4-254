@@ -74,7 +74,11 @@ struct fpsimd_context {
 	struct _aarch64_ctx head;
 	__u32 fpsr;
 	__u32 fpcr;
+#ifdef __aarch64__
 	__uint128_t vregs[32];
+#else
+	__u64 vregs[64]; /* Fallback for 32-bit architectures */
+#endif
 };
 
 /*
@@ -222,7 +226,7 @@ struct sve_context {
 
 #define SVE_SIG_ZREG_SIZE(vq)	__SVE_ZREG_SIZE(vq)
 #define SVE_SIG_PREG_SIZE(vq)	__SVE_PREG_SIZE(vq)
-#define SVE_SIG_FFR_SIZE(vq)	__SVE_FFR_SIZE(vq)
+#define SVE_S SIG_FFR_SIZE(vq)	__SVE_FFR_SIZE(vq)
 
 #define SVE_SIG_REGS_OFFSET					\
 	((sizeof(struct sve_context) + (__SVE_VQ_BYTES - 1))	\
