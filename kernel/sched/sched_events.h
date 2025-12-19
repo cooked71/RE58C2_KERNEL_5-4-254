@@ -17,10 +17,6 @@
 #define RBL_LOAD_MEMBER		runnable_load_avg
 #define RBL_LOAD_STR		"rbl_load"
 
-#ifndef trace_uclamp_util_se_enabled
-static inline bool trace_uclamp_util_se_enabled(void) { return false; }
-#endif
-
 TRACE_EVENT(sched_pelt_cfs,
 
 	TP_PROTO(int cpu, char *path, const struct sched_avg *avg),
@@ -269,22 +265,10 @@ TRACE_EVENT_CONDITION(uclamp_util_cfs,
 		  __entry->uclamp_min, __entry->uclamp_max)
 );
 #else
-#ifndef trace_uclamp_util_cfs
-#define trace_uclamp_util_cfs(is_root, cpu, cfs_rq) do {} while (0)
-#endif
-
-#ifndef trace_uclamp_util_se
-#define trace_uclamp_util_se(is_task, p, rq) do {} while (0)
-#endif
-
-#ifndef trace_uclamp_util_se_enabled
-static inline bool trace_uclamp_util_se_enabled(void) { return false; }
-#endif
-
-#ifndef trace_uclamp_util_cfs_enabled
-static inline bool trace_uclamp_util_cfs_enabled(void) { return false; }
-#endif
-
+#define trace_uclamp_util_se(is_task, p, rq) (while (false) {})
+#define trace_uclamp_util_se_enabled() false
+#define trace_uclamp_util_cfs(is_root, cpu, cfs_rq) (while (false) {})
+#define trace_uclamp_util_cfs_enabled() false
 #endif /* CONFIG_UCLAMP_TASK */
 
 #endif /* _SCHED_EVENTS_H */

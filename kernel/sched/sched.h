@@ -2676,20 +2676,3 @@ static inline u64 sched_ktime_clock(void)
 	return sched_clock();
 }
 #endif
-
-#ifndef cpu_util_rt
-static inline unsigned long cpu_util_rt(struct rq *rq) { return 0; }
-#endif
-
-#ifndef cpu_util_dl
-static inline unsigned long cpu_util_dl(struct rq *rq) { return 0; }
-#endif
-
-#ifndef cpu_bw_dl
-static inline unsigned long cpu_bw_dl(struct rq *rq) { return 0; }
-#endif
-
-#ifndef cpu_util_cfs
-static inline unsigned long cpu_util_cfs(struct rq *rq) { return 0; }
-#endif
-
