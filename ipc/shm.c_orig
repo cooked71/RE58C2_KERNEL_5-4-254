@@ -44,6 +44,7 @@
 #include <linux/mount.h>
 #include <linux/ipc_namespace.h>
 #include <linux/rhashtable.h>
+
 #include <linux/uaccess.h>
 
 #include "util.h"
@@ -148,26 +149,19 @@ static int __init ipc_ns_init(void)
 	shm_init_ns(&init_ipc_ns);
 	return 0;
 }
+
 pure_initcall(ipc_ns_init);
 
 void __init shm_init(void)
 {
 	ipc_init_proc_interface("sysvipc/shm",
 #if BITS_PER_LONG <= 32
-		"       key      shmid perms       size  cpid  lpid nattch   uid   gid  cuid  cgid      atime      dtime      ctime        rss       swap\n",
+				"       key      shmid perms       size  cpid  lpid nattch   uid   gid  cuid  cgid      atime      dtime      ctime        rss       swap\n",
 #else
-		"       key      shmid perms                  size  cpid  lpid nattch   uid   gid  cuid  cgid      atime      dtime      ctime                   rss                  swap\n",
+				"       key      shmid perms                  size  cpid  lpid nattch   uid   gid  cuid  cgid      atime      dtime      ctime                   rss                  swap\n",
 #endif
-		IPC_SHM_IDS, sysvipc_shm_proc_show);
+				IPC_SHM_IDS, sysvipc_shm_proc_show);
 }
-
-/* Wrapper to call shm_init at postcore stage */
-static int __init delayed_shm_init(void)
-{
-	shm_init();
-	return 0;
-}
-postcore_initcall(delayed_shm_init);
 
 static inline struct shmid_kernel *shm_obtain_object(struct ipc_namespace *ns, int id)
 {

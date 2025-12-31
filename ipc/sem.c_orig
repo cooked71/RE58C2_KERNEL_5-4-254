@@ -2445,13 +2445,3 @@ static int sysvipc_sem_proc_show(struct seq_file *s, void *it)
 	return 0;
 }
 #endif
-
-#ifdef CONFIG_SYSVIPC
-/* Delayed semaphore initialization to postcore stage */
-static int __init delayed_sem_init(void)
-{
-	sem_init();
-	return 0;
-}
-postcore_initcall(delayed_sem_init);
-#endif
